@@ -35,6 +35,9 @@ export default class EmailSender {
     // accessToken will be set after the authorization with the refresh token
   }
 
+  public waitForSeconds = (sec: number) =>
+    new Promise((resolve) => setTimeout(resolve, sec * 1000));
+
   public isValidEmail(): boolean {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
