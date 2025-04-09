@@ -1,11 +1,13 @@
+import nodemailer, { SendMailOptions, Transporter } from 'nodemailer';
+
 import axios from 'axios';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import { google } from 'googleapis';
-import nodemailer, { SendMailOptions, Transporter } from 'nodemailer';
 import path from 'path';
 
+import { google } from 'googleapis';
 import { fileURLToPath } from 'url';
+
 import IOAuth2Credentials from './IOAuth2Credentials';
 
 dotenv.config();
@@ -61,8 +63,7 @@ export default class EmailSender {
 
   // IDEA: catch the error
   public setAccessToken(accessToken: string | null | undefined) {
-    if (!accessToken)
-      throw new Error('Access token cannot be set as null or undefined.');
+    if (!accessToken) throw new Error('Access token cannot be set as null or undefined.');
 
     this.credentials.accessToken = accessToken;
   }
@@ -100,8 +101,7 @@ export default class EmailSender {
   }
 
   public async authorize() {
-    const { refreshToken, clientId, clientSecret, redirectUri } =
-      this.getCredentials();
+    const { refreshToken, clientId, clientSecret, redirectUri } = this.getCredentials();
 
     const oauth2Client = new google.auth.OAuth2({
       clientId,
